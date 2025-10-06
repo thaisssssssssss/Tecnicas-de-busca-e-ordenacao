@@ -2,7 +2,6 @@
 
 char* inicializaVetor(int n){
     char *vetor = calloc((n + 1), sizeof(char));
-    int i;
 
     return vetor;
 }

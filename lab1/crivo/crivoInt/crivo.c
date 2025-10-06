@@ -2,7 +2,6 @@
 
 int* inicializaVetor(int n){
     int *vetor = calloc((n + 1), sizeof(int));
-    int i;
 
     return vetor;
 }

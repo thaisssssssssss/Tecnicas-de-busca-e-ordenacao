@@ -2,7 +2,7 @@
 #include <time.h>
 
 void crivoInt(){
-    int n = 100;
+    int n = 1000;
     int *vetor = inicializaVetor(n);
     marcaPrimos(vetor, n);
     imprimeVetor(vetor, n); 
