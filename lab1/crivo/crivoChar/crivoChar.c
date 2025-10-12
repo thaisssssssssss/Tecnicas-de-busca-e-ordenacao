@@ -1,3 +1,7 @@
+// Thais Gomes Brandão 
+// Matrícula:  2024102657
+
+
 #include "crivoChar.h"
 
 char* inicializaVetor(int n){

@@ -1,3 +1,6 @@
+// Thais Gomes Brandão 
+// Matrícula:  2024102657
+
 #include "crivoBit.h"
 
 static unsigned char *a;
@@ -23,6 +26,7 @@ void marcaPrimos(int n){
             saltaMultiplos(i, n);
         }
     }
+    free(a);
 }
 
 void saltaMultiplos(int mult, int n){

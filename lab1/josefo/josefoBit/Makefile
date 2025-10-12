@@ -9,7 +9,7 @@
 CC=gcc
 CFLAGS=-I. -Wall -g  -lm
 
-SRC = crivoChar.c main.c
+SRC = josefo.c main.c
 
 
 prog: $(SRC)

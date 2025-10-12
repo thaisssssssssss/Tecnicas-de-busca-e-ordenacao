@@ -9,7 +9,7 @@
 CC=gcc
 CFLAGS=-I. -Wall -g  -lm
 
-SRC = crivoChar.c main.c
+SRC = pilhaOperandos.c pilhaOperadores.c main.c
 
 
 prog: $(SRC)
