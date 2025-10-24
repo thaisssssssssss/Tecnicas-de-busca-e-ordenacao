@@ -14,10 +14,7 @@ BST* adicionaChaveArvore(BST* arv, int chave);
 void imprimeBST(BST* arv);
 void liberaBST(BST* arv);
 int alturaBST(BST* arv);
-
-//funcoes de visitar pre, in e pos ordem
 void imprimeNoBST(BST* arv);
-void iterativa_preorder(BST* arv, void(*visit)(BST*));
-void iterativa_inorder(BST* arv, void(*visit)(BST*));
+void levelOrder(BST* arv, void(*visit)(BST*));
 
 #endif

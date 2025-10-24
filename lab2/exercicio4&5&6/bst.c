@@ -65,7 +65,7 @@ int alturaBST(BST* arv){
 }
 
 void imprimeNoBST(BST* arv){
-    printf("%d ", arv->valor);
+    //printf("%d ", arv->valor);
 }
 
 void iterativa_preorder(BST* arv, void(*visit)(BST*)){
@@ -107,26 +107,51 @@ void iterativa_inorder(BST* arv, void(*visit)(BST*)){
 
 
 void iterativa_postorder(BST* arv, void(*visit)(BST*)){
-    Pilha* pilha = criaPilhaVazia();
+    Pilha* pilhaRaiz = criaPilhaVazia();
+    Pilha* pilhaEfetiva = criaPilhaVazia();
 
     while(1){
         if(!confereBSTvazia(arv)){
-            pilha = push(pilha, arv);
-            arv = arv->esq;
+            pilhaRaiz = push(pilhaRaiz, arv);
+            pilhaEfetiva = push(pilhaEfetiva, arv);
+            arv = arv->dir;
         }
         else{
-            if(conferePilhaVazia(pilha)) break;
-            else{
-                arv = pop(pilha);
-                pilha = liberaTopo(pilha);
-                if(confereBSTvazia(arv->dir)){
-                    visit(arv);
-                    pilha = push(pilha, arv);
-                }
-                else arv = arv->dir;
-
-                // visit(arv);
-            }
+            if(conferePilhaVazia(pilhaRaiz)) break;
+            arv = pop(pilhaRaiz);
+            pilhaRaiz = liberaTopo(pilhaRaiz);
+            arv = arv->esq;
         }
     }
+
+    while(!conferePilhaVazia(pilhaEfetiva)){
+        arv = pop(pilhaEfetiva);
+        pilhaEfetiva = liberaTopo(pilhaEfetiva);
+        //visit(arv);
+    }
 }
+
+// void iterativa_postorder(BST *arv, void (*visit)(BST*)) {
+//     Pilha* pilha = criaPilhaVazia();
+//     BST* visitada = NULL;
+
+//     while (1) {
+//         if(!confereBSTvazia(arv)){
+//             pilha = push(pilha, arv);
+//             arv = arv->esq;
+//         } 
+//         else{
+//             if(conferePilhaVazia(pilha)) break;
+
+//             BST* atual = pop(pilha);           // lê o topo, NÃO remove
+//             if (atual->dir != NULL && visitada->valor != atual->dir->valor) {
+//                 arv = atual->dir;
+//             } 
+//             else {
+//                 visit(atual);
+//                 visitada = atual;
+//                 pilha = liberaTopo(pilha);    // agora sim remove o topo lido
+//             }
+//         }
+//     }
+// }

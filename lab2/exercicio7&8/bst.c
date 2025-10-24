@@ -1,4 +1,5 @@
 #include "bst.h"
+#include "fila.h"
 
 struct bst{
     int valor;
@@ -64,33 +65,25 @@ int alturaBST(BST* arv){
 }
 
 void imprimeNoBST(BST* arv){
-    //printf("%d ", arv->valor);
+    printf("%d ", arv->valor);
 }
 
-void rec_preorder(BST *arv, void (*visit)(BST*)){
-    if(confereBSTvazia(arv)) return;
-    else{
-        //visit(arv);
-        rec_preorder(arv->esq, visit);
-        rec_preorder(arv->dir, visit);
+void levelOrder(BST* arv, void(*visit)(BST*)){
+    Fila* fila = criaFilaVazia();
+    //if(!confereBSTvazia(arv)) enfileira(fila, arv);
+
+    while(1){
+        if(!confereBSTvazia(arv)){
+            enfileira(fila, arv->esq);
+            enfileira(fila, arv->dir);
+        }
+
+        if(confereFilaVazia(fila)) break;
+        else{
+            visit(arv);
+            arv = desenfileira(fila);
+        }
     }
-}
 
-void rec_inorder(BST *arv, void (*visit)(BST*)){
-    if(confereBSTvazia(arv)) return;
-    else{
-        rec_inorder(arv->esq, visit);
-        //visit(arv);
-        rec_inorder(arv->dir, visit);
-    }
+    liberaFila(fila);
 }
-
-void rec_postorder(BST *arv, void (*visit)(BST*)){
-    if(confereBSTvazia(arv)) return;
-    else{
-        rec_postorder(arv->esq, visit);
-        rec_postorder(arv->dir, visit);
-        //visit(arv);
-    }
-}
-
