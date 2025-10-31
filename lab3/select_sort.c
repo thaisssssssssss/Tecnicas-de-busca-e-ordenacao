@@ -1,6 +1,12 @@
+// Thais Gomes Brandão 
+// Matrícula:  2024102657
+
+
 #include "item.h"
+#include <stdio.h>
 
 extern void sort(Item *a, int lo, int hi){
+    printf("EXECUTANDO SELECTION SORT\n");
     int i, j, posicao;
     Item menor;
 
@@ -19,8 +25,3 @@ extern void sort(Item *a, int lo, int hi){
     }
 }
 
-
-// #define key(A) (A)
-// #define less(A, B) (key(A) < key(B))
-// #define exch(A, B) { Item t = A; A = B; B = t; }
-// #define compexch(A, B) if (less(B, A)) exch(A, B)
