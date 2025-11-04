@@ -1,3 +1,7 @@
+// Thais Gomes Brandão 
+// Matrícula:  2024102657
+
+
 #include "bst.h"
 #include "fila.h"
 
@@ -70,7 +74,6 @@ void imprimeNoBST(BST* arv){
 
 void levelOrder(BST* arv, void(*visit)(BST*)){
     Fila* fila = criaFilaVazia();
-    //if(!confereBSTvazia(arv)) enfileira(fila, arv);
 
     while(1){
         if(!confereBSTvazia(arv)){
@@ -80,7 +83,7 @@ void levelOrder(BST* arv, void(*visit)(BST*)){
 
         if(confereFilaVazia(fila)) break;
         else{
-            visit(arv);
+            //visit(arv);
             arv = desenfileira(fila);
         }
     }

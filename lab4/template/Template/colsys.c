@@ -106,13 +106,30 @@ void predict(Particle *p) {
     //
     //       Faça os seguintes passos nessa função.
 
+    if(!p) return;
     // - Se p é nulo, retorne imediatamente.
 
+    int i;
+    double time = 0;
+    Event* newEvent;
+    for(i = 0; i < N; i++){
+        time = time_to_hit(p, particles[i]);
+        if(time + t <= limit){
+            newEvent = create_event(time, p, particles[i]);
+            PQ_insert(pq, newEvent);
+        }
+    }
     // - Calcule o tempo de colisão de 'p' com todas as partículas do vetor
     //   de partículas usando a função 'time_to_hit'. Se a colisão vai ocorrer
     //   dentro do limite de tempo da simulação (variável global 'limit'), crie
     //   um evento e insira-o na fila.
 
+
+    time = time_to_hit_vertical_wall(p);
+    if(time + t <= limit){
+        newEvent = create_event(time, p, NULL);
+        PQ_insert(pq, newEvent);
+    }
     // - Calcule o tempo de colisão de 'p' com a parede vertical utilizando a
     //   função 'time_to_hit_vertical_wall'. Se a colisão vai ocorrer
     //   dentro do limite de tempo da simulação (variável global 'limit'), crie
@@ -121,12 +138,17 @@ void predict(Particle *p) {
     //   parece vertical é criado passando-se a SEGUNDA partícula para a função
     //   como nula.
 
+    time = time_to_hit_horizontal_wall(p);
+    if(time + t <= limit){
+        newEvent = create_event(time, NULL, p);
+        PQ_insert(pq, newEvent);
+    }
     // - Calcule o tempo de colisão de 'p' com a parede horizontal utilizando a
     //   função 'time_to_hit_horizontal_wall'. Se a colisão vai ocorrer
     //   dentro do limite de tempo da simulação (variável global 'limit'), crie
     //   um evento e insira-o na fila. Conforme explicado no comentário da
     //   função 'create_event' em 'event.h', um evento de colisão com uma
-    //   parece vertical é criado passando-se a PRIMEIRA partícula para a função
+    //   parece horizontal é criado passando-se a PRIMEIRA partícula para a função
     //   como nula.
 }
 
@@ -166,6 +188,31 @@ void prepare() {
 void simulate() {
     printf("SIMULATION: Starting main loop.\n");
 
+    while(!PQ_is_empty(pq) && t <= limit){
+        Event* min = PQ_delmin(pq);
+        if(!is_valid(min)) destroy_event(min);
+        else{
+            int i;
+            for(i = 0; i < N; i++){
+                move_particle(particles[i], get_time(min) - t);
+            }
+            
+            Particle* a = get_A(min);
+            Particle* b = get_B(min);
+            
+            t = get_time(min);
+            destroy_event(min);
+
+            if(!a) bounce_off_horizontal_wall(b);
+            else if(!b) bounce_off_vertical_wall(a);
+            else if(a && b) bounce_off(a, b);
+            else redraw();
+            
+            predict(a);
+            predict(b);
+
+        }
+    }
     // TODO: Implemente aqui o loop principal da simulação orientada a eventos.
     //       Repita os seguintes passos enquanto a fila de eventos não estiver
     //       vazia e o tempo de simulação (variável global 't') não ultrapassar

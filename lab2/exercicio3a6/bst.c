@@ -1,3 +1,7 @@
+// Thais Gomes Brandão 
+// Matrícula:  2024102657
+
+
 #include "bst.h"
 #include "pilha.h"
 
@@ -131,27 +135,29 @@ void iterativa_postorder(BST* arv, void(*visit)(BST*)){
     }
 }
 
-// void iterativa_postorder(BST *arv, void (*visit)(BST*)) {
-//     Pilha* pilha = criaPilhaVazia();
-//     BST* visitada = NULL;
+void rec_preorder(BST *arv, void (*visit)(BST*)){
+    if(confereBSTvazia(arv)) return;
+    else{
+        //visit(arv);
+        rec_preorder(arv->esq, visit);
+        rec_preorder(arv->dir, visit);
+    }
+}
 
-//     while (1) {
-//         if(!confereBSTvazia(arv)){
-//             pilha = push(pilha, arv);
-//             arv = arv->esq;
-//         } 
-//         else{
-//             if(conferePilhaVazia(pilha)) break;
+void rec_inorder(BST *arv, void (*visit)(BST*)){
+    if(confereBSTvazia(arv)) return;
+    else{
+        rec_inorder(arv->esq, visit);
+        //visit(arv);
+        rec_inorder(arv->dir, visit);
+    }
+}
 
-//             BST* atual = pop(pilha);           // lê o topo, NÃO remove
-//             if (atual->dir != NULL && visitada->valor != atual->dir->valor) {
-//                 arv = atual->dir;
-//             } 
-//             else {
-//                 visit(atual);
-//                 visitada = atual;
-//                 pilha = liberaTopo(pilha);    // agora sim remove o topo lido
-//             }
-//         }
-//     }
-// }
+void rec_postorder(BST *arv, void (*visit)(BST*)){
+    if(confereBSTvazia(arv)) return;
+    else{
+        rec_postorder(arv->esq, visit);
+        rec_postorder(arv->dir, visit);
+        //visit(arv);
+    }
+}

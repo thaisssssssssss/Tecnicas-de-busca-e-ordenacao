@@ -5,7 +5,7 @@
 #include "item.h"
 #include <stdio.h>
 
-extern void sort(Item *a, int lo, int hi){
+void sort(Item *a, int lo, int hi){
     printf("EXECUTANDO INSERTION SORT\n");
     int i, j, posicao;
 

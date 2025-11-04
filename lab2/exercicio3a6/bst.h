@@ -1,3 +1,7 @@
+// Thais Gomes Brandão 
+// Matrícula:  2024102657
+
+
 #ifndef BST_H
 #define BST_H
 
@@ -20,5 +24,11 @@ void imprimeNoBST(BST* arv);
 void iterativa_preorder(BST* arv, void(*visit)(BST*));
 void iterativa_inorder(BST* arv, void(*visit)(BST*));
 void iterativa_postorder(BST* arv, void(*visit)(BST*));
+
+//funcoes de visitar pre, in e pos ordem
+void imprimeNoBST(BST* arv);
+void rec_preorder(BST *arv, void (*visit)(BST*));
+void rec_inorder(BST *arv, void (*visit)(BST*));
+void rec_postorder(BST *arv, void (*visit)(BST*));
 
 #endif

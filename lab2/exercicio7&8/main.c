@@ -1,35 +1,22 @@
+// Thais Gomes Brandão 
+// Matrícula:  2024102657
+
+
 #include "bst.h"
 #include <time.h>
 
-int main(){
+int main(int argc, char* argv[]){
     BST* arv = criaBSTvazia();
 
-    arv = adicionaChaveArvore(arv, 15);
-    arv = adicionaChaveArvore(arv, 12);
-    arv = adicionaChaveArvore(arv, 10);
-    arv = adicionaChaveArvore(arv, 4);
-    arv = adicionaChaveArvore(arv, 20);
-    arv = adicionaChaveArvore(arv, 22);
-    arv = adicionaChaveArvore(arv, 13);
-    arv = adicionaChaveArvore(arv, 14);
+    int i;
+    int n = atoi(argv[1]);
 
+    srand(time(NULL)); // should only be called once
 
-    // int n = 10000000, i;
-    // //scanf("%d", &n);
-
-    // srand(time(NULL)); // should only be called once
-
-    // for(i = 0; i < n; i++){
-    //     int r = rand(); // returns a pseudo-random integer between 0 and RAND_MAX
-    //     arv = adicionaChaveArvore(arv, r);
-    // }
-
-    // clock_t start = clock ();
-    // iterativa_postorder(arv, imprimeNoBST);
-    // clock_t end = clock ();
-
-    // double seconds = (( double ) end - start ) / CLOCKS_PER_SEC ;
-    // printf ("%lf\n", seconds);
+    for(i = 0; i < n; i++){
+        int r = rand(); // returns a pseudo-random integer between 0 and RAND_MAX
+        arv = adicionaChaveArvore(arv, r);
+    }
 
     levelOrder(arv, imprimeNoBST);
     liberaBST(arv);
