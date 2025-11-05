@@ -106,7 +106,7 @@ void predict(Particle *p) {
     //
     //       Faça os seguintes passos nessa função.
 
-    if(!p) return;
+    if(p == NULL) return;
     // - Se p é nulo, retorne imediatamente.
 
     int i;
@@ -115,7 +115,7 @@ void predict(Particle *p) {
     for(i = 0; i < N; i++){
         time = time_to_hit(p, particles[i]);
         if(time + t <= limit){
-            newEvent = create_event(time, p, particles[i]);
+            newEvent = create_event(time + t, p, particles[i]);
             PQ_insert(pq, newEvent);
         }
     }
@@ -127,7 +127,7 @@ void predict(Particle *p) {
 
     time = time_to_hit_vertical_wall(p);
     if(time + t <= limit){
-        newEvent = create_event(time, p, NULL);
+        newEvent = create_event(time + t, p, NULL);
         PQ_insert(pq, newEvent);
     }
     // - Calcule o tempo de colisão de 'p' com a parede vertical utilizando a
@@ -140,7 +140,7 @@ void predict(Particle *p) {
 
     time = time_to_hit_horizontal_wall(p);
     if(time + t <= limit){
-        newEvent = create_event(time, NULL, p);
+        newEvent = create_event(time + t, NULL, p);
         PQ_insert(pq, newEvent);
     }
     // - Calcule o tempo de colisão de 'p' com a parede horizontal utilizando a
@@ -203,9 +203,9 @@ void simulate() {
             t = get_time(min);
             destroy_event(min);
 
-            if(!a) bounce_off_horizontal_wall(b);
-            else if(!b) bounce_off_vertical_wall(a);
-            else if(a && b) bounce_off(a, b);
+            if(a && b) bounce_off(a, b);
+            else if(!a && b) bounce_off_horizontal_wall(b);
+            else if(a && !b) bounce_off_vertical_wall(a);
             else redraw();
             
             predict(a);

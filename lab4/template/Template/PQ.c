@@ -38,7 +38,11 @@ PQ* PQ_create(int max_N) {
 
     PQ* pq = malloc(sizeof(struct pq));
     pq->max_N = max_N;
-    pq->minHeap = malloc(sizeof(struct event*) * pq->max_N);
+    pq->minHeap = malloc(sizeof(struct event*) * (pq->max_N + 1));
+    int i;
+    for(i = 1; i <= pq->max_N; i++){
+        pq->minHeap[i] = NULL;
+    }
     pq->pos = 0;
     return pq;
 }
@@ -50,8 +54,8 @@ void PQ_destroy(PQ *pq) {
     // TODO: Implemente essa função que libera toda a memória da fila,
     //       destruindo inclusive os eventos que estavam na fila.
     int i;
-    for(i = 1; i < pq->max_N; i++){
-        if(pq->minHeap[i]) destroy_event(pq->minHeap[i]);
+    for(i = 1; i <= pq->max_N; i++){
+        if(pq->minHeap[i] != NULL) destroy_event(pq->minHeap[i]);
     }
     free(pq->minHeap);
     free(pq);
@@ -60,7 +64,7 @@ void PQ_destroy(PQ *pq) {
 //reoordena a estrutura apos adicionar novo evento
 static void fixUp(PQ* pq){
     int k = pq->pos;
-    while((compare(pq->minHeap[k], pq->minHeap[k/2]) < 0) && k > 1){
+    while(k > 1 && (compare(pq->minHeap[k], pq->minHeap[k/2]) < 0)){
         exch(pq->minHeap[k], pq->minHeap[k/2]);
         k = k / 2;
     }
@@ -90,6 +94,7 @@ static void fixDown(PQ* pq){
         if(j < pq->pos){
             if(compare(pq->minHeap[j + 1], pq->minHeap[j]) < 0) j++;
         }
+
         if(compare(pq->minHeap[j], pq->minHeap[k]) < 0){
             exch(pq->minHeap[j], pq->minHeap[k]);
             k = j;
@@ -107,6 +112,7 @@ Event* PQ_delmin(PQ *pq) {
     if(pq->pos >= 1){
         Event* min = pq->minHeap[1];
         exch(pq->minHeap[1], pq->minHeap[pq->pos]);
+        pq->minHeap[pq->pos] = NULL;
         pq->pos--;
         fixDown(pq);
         return min;
