@@ -6,7 +6,8 @@
 #define GUI 1                // Modifique para 0 se não quiser a janela.
 
 int main(int argc, char* argv[]) {
-    system_init(atoi(argv[1]), MAX_SIM_TIME, GUI);
+    //system_init(atoi(argv[1]), MAX_SIM_TIME, GUI);
+    system_init(4, MAX_SIM_TIME, GUI);
 
     if (argc == 3) {
         load_particles(argv[2]);
