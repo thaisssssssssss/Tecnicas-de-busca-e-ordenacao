@@ -1,26 +1,27 @@
 #include "merge_sort.h"
+#define SZ2 (sz+sz)
+#define MIN(X,Y) ((X < Y) ? (X) : (Y))
 
-#define CUTOFF 1
 
 void sort(Item *a, int lo, int hi){
     int n = (hi - lo) + 1;
     Item* aux = malloc(n * sizeof(Item));
-    mergeSortSkip(a, aux, lo, hi);
+    mergeSort(a, aux, lo, hi);
     free(aux);
 }
 
-/**
- * CASO EM QUE O ULTIMO ELEMENTO DA PRIMEIRA METADE EH MENOR QUE O 
- * PRIMEIRO ELEMENTO DA SEGUNDA METADE (JA ESTA ORDENADO)
- */
-void mergeSortSkip(Item* vet, Item* aux, int lo, int hi){
-    if(hi <= lo) return;
-    else{
-        int mid = (lo + hi) / 2;
-        mergeSortSkip(vet, aux, lo, mid);
-        mergeSortSkip(vet, aux, mid+1, hi);
-        if(less(vet[mid], vet[mid+1])) return;
-        merge(vet, aux, lo, mid, hi);
+/**VERSAO BOTTOM-UP (ITERATIVA) 
+ * PRIMEIRO LOOP DUPLICA AS PASSADAS
+ * SEGUNDO ACHA MIN, MID E MAX E CHAMA MERGE
+*/
+void mergeSort(Item *a, Item* aux, int lo, int hi) {
+    int N = (hi - lo) + 1;
+    int y = N - 1;
+    for (int sz = 1; sz < N; sz = SZ2) {
+        for (int lo = 0; lo < N-sz; lo += SZ2) {
+            int x = lo + SZ2 - 1;
+            merge(a, aux, lo, lo+sz-1, MIN(x,y));
+        }
     }
 }
 
@@ -39,3 +40,4 @@ void merge(Item* vet, Item* aux, int lo, int mid, int hi){
         else vet[i] = aux[b++];
     }
 }
+

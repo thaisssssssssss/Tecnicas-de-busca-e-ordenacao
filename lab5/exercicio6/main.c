@@ -22,6 +22,7 @@ int main(int argc, char* argv[]){
     for(i = 0; i < n; i++){
         printf("%d ", vet[i]);
     }
+    free(vet);
 
     return 0;
 }

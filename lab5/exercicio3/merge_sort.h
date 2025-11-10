@@ -9,12 +9,8 @@
 
 void sort(Item *a, int lo, int hi);
 
-void mergeSortCutoff(Item* vet, Item* aux, int lo, int hi);
-
 void mergeSortSkip(Item* vet, Item* aux, int lo, int hi);
 
 void merge(Item* vet, Item* aux, int lo, int mid, int hi);
-
-void insertSort(Item *a, int lo, int hi);
 
 #endif

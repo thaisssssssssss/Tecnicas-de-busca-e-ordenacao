@@ -2,6 +2,22 @@
 
 #define CUTOFF 1
 
+static void insertSort(Item *a, int lo, int hi){
+    //printf("EXECUTANDO INSERTION SORT\n");
+    int i, j, posicao;
+
+    for(i = lo + 1; i < hi; i++){
+        posicao = i;
+        for(j = i - 1; j >= lo; j--){
+            if(less(a[posicao], a[j])){
+                exch(a[posicao], a[j]);
+                posicao = j;
+            }
+            else break;
+        }
+    }
+}
+
 void sort(Item *a, int lo, int hi){
     printf("CUTOFF %d\n", CUTOFF);
     int n = (hi - lo) + 1;
@@ -42,19 +58,3 @@ void merge(Item* vet, Item* aux, int lo, int mid, int hi){
     }
 }
 
-
-void insertSort(Item *a, int lo, int hi){
-    //printf("EXECUTANDO INSERTION SORT\n");
-    int i, j, posicao;
-
-    for(i = lo + 1; i < hi; i++){
-        posicao = i;
-        for(j = i - 1; j >= lo; j--){
-            if(less(a[posicao], a[j])){
-                exch(a[posicao], a[j]);
-                posicao = j;
-            }
-            else break;
-        }
-    }
-}

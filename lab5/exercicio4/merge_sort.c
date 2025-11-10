@@ -2,6 +2,22 @@
 
 #define CUTOFF 1
 
+static void insertSort(Item *a, int lo, int hi){
+    //printf("EXECUTANDO INSERTION SORT\n");
+    int i, j, posicao;
+
+    for(i = lo + 1; i < hi; i++){
+        posicao = i;
+        for(j = i - 1; j >= lo; j--){
+            if(less(a[posicao], a[j])){
+                exch(a[posicao], a[j]);
+                posicao = j;
+            }
+            else break;
+        }
+    }
+}
+
 void sort(Item *a, int lo, int hi){
     printf("CUTOFF %d\n", CUTOFF);
     int n = (hi - lo) + 1;
@@ -10,7 +26,9 @@ void sort(Item *a, int lo, int hi){
     free(aux);
 }
 
-/**CASO EM QUE OS VETORES SAO PEQUENOS, ORDENA-OS COM INSERTION SORT*/
+/**CASO EM QUE OS VETORES SAO PEQUENOS, ORDENA-OS COM INSERTION SORT E
+ * CONFERE SE JA NAO ESTA PRE ORDENADO ANTES DE CHAMAR MERGE
+*/
 void mergeSort(Item* vet, Item* aux, int lo, int hi){
     if(hi <= lo + CUTOFF){
         insertSort(vet, lo, hi);
@@ -19,8 +37,8 @@ void mergeSort(Item* vet, Item* aux, int lo, int hi){
     if(hi <= lo) return;
     else{
         int mid = (lo + hi) / 2;
-        mergeSortCutoff(vet, aux, lo, mid);
-        mergeSortCutoff(vet, aux, mid+1, hi);
+        mergeSort(vet, aux, lo, mid);
+        mergeSort(vet, aux, mid+1, hi);
         if(less(vet[mid+1], vet[mid])) return;
         merge(vet, aux, lo, mid, hi);
     }
@@ -43,19 +61,3 @@ void merge(Item* vet, Item* aux, int lo, int mid, int hi){
     }
 }
 
-
-void insertSort(Item *a, int lo, int hi){
-    //printf("EXECUTANDO INSERTION SORT\n");
-    int i, j, posicao;
-
-    for(i = lo + 1; i < hi; i++){
-        posicao = i;
-        for(j = i - 1; j >= lo; j--){
-            if(less(a[posicao], a[j])){
-                exch(a[posicao], a[j]);
-                posicao = j;
-            }
-            else break;
-        }
-    }
-}

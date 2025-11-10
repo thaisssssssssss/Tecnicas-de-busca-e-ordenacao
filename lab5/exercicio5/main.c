@@ -5,7 +5,7 @@ int main(int argc, char* argv[]){
     srand(time(NULL)); // should only be called once
     
     //int n = atoi(argv[1]);
-    int n = 1000;
+    int n = 100;
     Item* vet = malloc(sizeof(Item) * (n+1));
     int i;
     for(i = 0; i < n; i++){
@@ -22,6 +22,7 @@ int main(int argc, char* argv[]){
     for(i = 0; i < n; i++){
         printf("%d ", vet[i]);
     }
+    free(vet);
 
     return 0;
 }
