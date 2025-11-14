@@ -10,7 +10,6 @@ int main(int argc, char* argv[]){
     
     int n = atoi(argv[1]);
     char* caminho = strdup(argv[2]);
-
     FILE* arq = fopen(caminho, "r");
 
     Item* vet = malloc(sizeof(Item) * (n+1));
@@ -19,6 +18,8 @@ int main(int argc, char* argv[]){
         fscanf(arq, "%d", &r);
         vet[i] = r;
     }
+
+    vet[n] = 0;
     
     fclose(arq);
 
@@ -30,6 +31,9 @@ int main(int argc, char* argv[]){
     printf ("TEMPO: %lf\n\n", seconds);
 
 
+    for(i = 0; i < 100; i++){
+        printf("%d ", vet[i]);
+    }
 
     printf("\n\nMERGE BOTTOM-UP COM CUTOFF:\n");
     start = clock ();
@@ -38,7 +42,9 @@ int main(int argc, char* argv[]){
     seconds = (( double ) end - start ) / CLOCKS_PER_SEC;
     printf ("TEMPO: %lf\n\n", seconds);
 
-    
+    for(i = 0; i < 100; i++){
+        printf("%d ", vet[i]);
+    }
 
     printf("\n\nMERGE BOTTOM-UP COM SKIP:\n");
     start = clock ();
@@ -47,7 +53,9 @@ int main(int argc, char* argv[]){
     seconds = (( double ) end - start ) / CLOCKS_PER_SEC;
     printf ("TEMPO: %lf\n\n", seconds);
     
-
+    for(i = 0; i < 100; i++){
+        printf("%d ", vet[i]);
+    }
 
     printf("\n\nMERGE BOTTOM-UP COM CUTOFF E SKIP:\n");
     start = clock ();
@@ -56,6 +64,10 @@ int main(int argc, char* argv[]){
     seconds = (( double ) end - start ) / CLOCKS_PER_SEC;
     printf ("TEMPO: %lf\n\n", seconds);
 
+
+    for(i = 0; i < 100; i++){
+        printf("%d ", vet[i]);
+    }
     free(caminho);
     free(vet);
 

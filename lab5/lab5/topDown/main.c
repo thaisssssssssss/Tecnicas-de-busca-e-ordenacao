@@ -20,6 +20,7 @@ int main(int argc, char* argv[]){
         vet[i] = r;
     }
     
+    vet[n] = 0;
     fclose(arq);
 
     printf("\n\nMERGE TOP-DOWN SEM ALTERACOES:\n");
@@ -57,7 +58,8 @@ int main(int argc, char* argv[]){
     printf ("TEMPO: %lf\n\n", seconds);
 
 
-
+    free(caminho);
     free(vet);
+
     return 0;
 }

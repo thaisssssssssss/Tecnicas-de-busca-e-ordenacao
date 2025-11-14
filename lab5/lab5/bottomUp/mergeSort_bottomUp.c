@@ -6,7 +6,7 @@
 
 #define SZ2 (sz+sz)
 #define MIN(X,Y) ((X < Y) ? (X) : (Y))
-#define CUTOFF 1
+#define CUTOFF 16
 
 //INSERT SORT PRA VERSAO MERGE SORT COM CUTOFF
 static void insertSort(Item *a, int lo, int hi){
@@ -29,7 +29,7 @@ static void insertSort(Item *a, int lo, int hi){
 void sort(Item *a, int lo, int hi, int TIPO) {
     int n = (hi - lo) + 1;
     Item* aux = malloc(n * sizeof(Item));
-
+    printf("CUTOFF: %d\n", CUTOFF);
     if(TIPO == BOTTOMUP) mergeSort_bottomUp(a, aux, lo, hi);
     else if(TIPO == BOTTOMUP_CUTOFF) mergeSortCutoff(a, aux, lo, hi);
     else if(TIPO == BOTTOMUP_SKIP) mergeSortSkip(a, aux, lo, hi);

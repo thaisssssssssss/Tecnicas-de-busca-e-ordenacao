@@ -4,7 +4,7 @@
 
 #include "mergeSort_topDown.h"
 
-#define CUTOFF 1
+#define CUTOFF 16
 
 //INSERT SORT PRA VERSAO MERGE SORT COM CUTOFF
 static void insertSort(Item *a, int lo, int hi){
@@ -27,7 +27,6 @@ static void insertSort(Item *a, int lo, int hi){
 void sort(Item *a, int lo, int hi, int TIPO) {
     int n = (hi - lo) + 1;
     Item* aux = malloc(n * sizeof(Item));
-
     if(TIPO == TOPDOWN) mergeSort_topDown(a, aux, lo, hi);
     else if(TIPO == TOPDOWN_CUTOFF) mergeSortCutoff(a, aux, lo, hi);
     else if(TIPO == TOPDOWN_SKIP) mergeSortSkip(a, aux, lo, hi);
