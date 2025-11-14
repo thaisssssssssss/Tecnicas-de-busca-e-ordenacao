@@ -1,3 +1,7 @@
+// Thais Gomes Brandão 
+// Matrícula:  2024102657
+
+
 #include "mergeSort_topDown.h"
 
 #define CUTOFF 1

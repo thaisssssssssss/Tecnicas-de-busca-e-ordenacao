@@ -1,3 +1,7 @@
+// Thais Gomes Brandão 
+// Matrícula:  2024102657
+
+
 #include "merge.h"
 
 void merge(Item* vet, Item* aux, int lo, int mid, int hi){

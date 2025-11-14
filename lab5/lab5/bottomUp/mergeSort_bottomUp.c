@@ -1,3 +1,7 @@
+// Thais Gomes Brandão 
+// Matrícula:  2024102657
+
+
 #include "mergeSort_bottomUp.h"
 
 #define SZ2 (sz+sz)

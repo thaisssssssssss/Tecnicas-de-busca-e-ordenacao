@@ -1,3 +1,7 @@
+// Thais Gomes Brandão 
+// Matrícula:  2024102657
+
+
 #ifndef MERGE_SORT_H
 #define MERGE_SORT_H
 

@@ -1,18 +1,26 @@
+// Thais Gomes Brandão 
+// Matrícula:  2024102657
+
+
 #include "mergeSort_bottomUp.h"
 #include <time.h>
 
 int main(int argc, char* argv[]){
     srand(time(NULL)); // should only be called once
     
-    //int n = atoi(argv[1]);
-    int n = 100;
+    int n = atoi(argv[1]);
+    char* caminho = strdup(argv[2]);
+
+    FILE* arq = fopen(caminho, "r");
+
     Item* vet = malloc(sizeof(Item) * (n+1));
-    int i;
+    int i, r;
     for(i = 0; i < n; i++){
-        int r = rand()%1000; // returns a pseudo-random integer between 0 and RAND_MAX
+        fscanf(arq, "%d", &r);
         vet[i] = r;
     }
     
+    fclose(arq);
 
     printf("\n\nMERGE BOTTOM-UP SEM ALTERACOES:\n");
     clock_t start = clock ();
@@ -21,9 +29,6 @@ int main(int argc, char* argv[]){
     double seconds = (( double ) end - start ) / CLOCKS_PER_SEC;
     printf ("TEMPO: %lf\n\n", seconds);
 
-    for(i = 0; i < n; i++){
-        printf("%d ", vet[i]);
-    }
 
 
     printf("\n\nMERGE BOTTOM-UP COM CUTOFF:\n");
@@ -33,9 +38,7 @@ int main(int argc, char* argv[]){
     seconds = (( double ) end - start ) / CLOCKS_PER_SEC;
     printf ("TEMPO: %lf\n\n", seconds);
 
-    for(i = 0; i < n; i++){
-        printf("%d ", vet[i]);
-    }
+    
 
     printf("\n\nMERGE BOTTOM-UP COM SKIP:\n");
     start = clock ();
@@ -44,9 +47,7 @@ int main(int argc, char* argv[]){
     seconds = (( double ) end - start ) / CLOCKS_PER_SEC;
     printf ("TEMPO: %lf\n\n", seconds);
     
-    for(i = 0; i < n; i++){
-        printf("%d ", vet[i]);
-    }
+
 
     printf("\n\nMERGE BOTTOM-UP COM CUTOFF E SKIP:\n");
     start = clock ();
@@ -55,9 +56,8 @@ int main(int argc, char* argv[]){
     seconds = (( double ) end - start ) / CLOCKS_PER_SEC;
     printf ("TEMPO: %lf\n\n", seconds);
 
-    for(i = 0; i < n; i++){
-        printf("%d ", vet[i]);
-    }
+    free(caminho);
+    free(vet);
 
     return 0;
 }

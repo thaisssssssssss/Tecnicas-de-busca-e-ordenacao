@@ -1,3 +1,7 @@
+// Thais Gomes Brandão 
+// Matrícula:  2024102657
+
+
 #include "merge.h"
 
 void merge(Item* vet, Item* aux, int lo, int mid, int hi){
@@ -11,7 +15,7 @@ void merge(Item* vet, Item* aux, int lo, int mid, int hi){
     for(i = lo; i <= hi; i++){
         if(a > mid) vet[i] = aux[b++];
         else if(b > hi) vet[i] = aux[a++];
-        else if(less(aux[a], aux[b])) vet[i] = aux[a++];
-        else vet[i] = aux[b++];
+        else if(less(aux[b], aux[a])) vet[i] = aux[b++];
+        else vet[i] = aux[a++];
     }
 }
