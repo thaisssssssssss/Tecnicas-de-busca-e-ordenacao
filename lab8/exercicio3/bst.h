@@ -1,3 +1,6 @@
+// Thais Gomes Brandão 
+// Matrícula:  2024102657
+
 #ifndef BST_H
 #define BST_H
 

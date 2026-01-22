@@ -1,3 +1,6 @@
+// Thais Gomes Brandão 
+// Matrícula:  2024102657
+
 #include "bst.h"
 
 struct bst{
@@ -46,7 +49,6 @@ BST* insereChaveBST(BST* bst, int chave, int valor){
     }
     else bst->valor = valor;
     
-    // bst->tamanho = calculaTamanhoBST(bst);
     bst->tamanho = atualizaTamanhoBST(bst);
     return bst;
 }
